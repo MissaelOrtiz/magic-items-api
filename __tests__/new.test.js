@@ -172,7 +172,7 @@ describe('post put and delete routes', () => {
           name: 'new sword',
           type: 'sword',
           level: '2',
-          cursed: 'true',
+          cursed: true,
           effect: 'does stuff'
         })
         .expect('Content-Type', /json/)
@@ -188,7 +188,7 @@ describe('post put and delete routes', () => {
         'type': 'Sword', 
         'level': 2, 
         'id': 9,
-        'cursed': 'true', 
+        'cursed': true, 
         'effect': 'does stuff', 
         'owner_id': 1,
       };
@@ -208,7 +208,7 @@ describe('post put and delete routes', () => {
           name: 'New Bracers of Storms',
           type: 'Bracers',
           level: 10,
-          cursed: 'false',
+          cursed: false,
           effect: 'A set of bracers made of a reflective, opalescent metal. They hum with an innate power, and often lance out bolts of lightning. Now with more lightning!'
         })
         .expect('Content-Type', /json/)
@@ -225,7 +225,7 @@ describe('post put and delete routes', () => {
         'type': 'Bracers', 
         'level': 10, 
         'id': 5,
-        'cursed': 'false', 
+        'cursed': false, 
         'effect': 'A set of bracers made of a reflective, opalescent metal. They hum with an innate power, and often lance out bolts of lightning. Now with more lightning!', 
         'owner_id': 1,
       };
@@ -255,7 +255,7 @@ describe('post put and delete routes', () => {
         'type': 'Bracers', 
         'level': 2, 
         'id': 5,
-        'cursed': 'false', 
+        'cursed': false, 
         'effect': 'A set of bracers made of a reflective, opalescent metal. They hum with an innate power, and often lance out bolts of lightning. Now with more lightning!', 
         'owner_id': 1,
       };
