@@ -169,14 +169,14 @@ describe('post put and delete routes', () => {
       const data = await fakeRequest(app)
         .post('/magicItems')
         .send({
-          name: 'new sword',
-          type: 'sword',
-          level: '2',
+          name: 'New Sword',
+          type: 'Sword',
+          level: 2,
           cursed: true,
           effect: 'does stuff'
         })
         .expect('Content-Type', /json/)
-        .expect(500);
+        .expect(200);
 
       const dataMagicItems = await fakeRequest(app)
         .get('/magicItems')
@@ -209,14 +209,13 @@ describe('post put and delete routes', () => {
           type: 'Bracers',
           level: 10,
           cursed: false,
-          effect: 'A set of bracers made of a reflective, opalescent metal. They hum with an innate power, and often lance out bolts of lightning. Now with more lightning!'
+          effect: 'A set of bracers made of a reflective, opalescent metal. They hum with an innate power, and often lance out bolts of lightning. Now with more lightning!',
         })
         .expect('Content-Type', /json/)
-        .expect(500);
+        .expect(200);
   
-      // make a request to see all board games
       const dataMagicItems = await fakeRequest(app)
-        .get('/magicItems')
+        .get('/magicItems/5')
         .expect('Content-Type', /json/)
         .expect(200);
   
