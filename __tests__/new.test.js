@@ -239,7 +239,7 @@ describe('post put and delete routes', () => {
 
       // make a request to update the new board game
       await fakeRequest(app)
-        .delete('/magicItems/5')
+        .delete('/magicItems/9')
         .expect('Content-Type', /json/)
         .expect(200);
     
@@ -250,12 +250,12 @@ describe('post put and delete routes', () => {
         .expect(200);
     
       const newMagicItem = { 
-        'name': 'New Bracers of Storms',
-        'type': 'Bracers', 
+        'name': 'New Sword',
+        'type': 'Sword', 
         'level': 2, 
-        'id': 5,
-        'cursed': false, 
-        'effect': 'A set of bracers made of a reflective, opalescent metal. They hum with an innate power, and often lance out bolts of lightning. Now with more lightning!', 
+        'id': 9,
+        'cursed': true, 
+        'effect': 'does stuff', 
         'owner_id': 1,
       };
           
