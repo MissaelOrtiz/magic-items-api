@@ -125,6 +125,7 @@ describe('app routes', () => {
         level: 6,
         name: 'Sword of Embers',
         type: 'Sword',
+        owner_id: 1,
       };
 
       const data = await fakeRequest(app)
@@ -133,6 +134,14 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body).toEqual(expectation);
+    });
+
+    test('returns all types of items', async() => {
+      const data = await fakeRequest(app)
+        .get('/types')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      expect(data.body.length).toBeGreaterThan(0);
     });
   });
 });

@@ -5,10 +5,12 @@ const { execSync } = require('child_process');
 const fakeRequest = require('supertest');
 const app = require('../lib/app');
 const client = require('../lib/client');
+const { getTypeIdByName } = require('../lib/utils.js');
 
 describe('post put and delete routes', () => {
   describe('routes', () => {
     let token;
+    let types;
   
     beforeAll(async done => {
       execSync('npm run setup-db');
@@ -32,12 +34,13 @@ describe('post put and delete routes', () => {
     });
       
     test('/POST magic-items creates a single magic item', async() => {
+      const typeId = getTypeIdByName(types, 'Sword');
 
       const data = await fakeRequest(app)
         .post('/magicItems')
         .send({
           name: 'New Sword',
-          type: 'Sword',
+          type_id: typeId,
           level: 2,
           cursed: true,
           effect: 'does stuff'
@@ -50,6 +53,16 @@ describe('post put and delete routes', () => {
         .expect('Content-Type', /json/)
         .expect(200);
 
+      const postedMagicItem = {
+        'name': 'New Sword',
+        'type_id': typeId,
+        'level': 2, 
+        'id': 9,
+        'cursed': true, 
+        'effect': 'does stuff', 
+        'owner_id': 1,
+      };
+
       const newMagicItem = { 
         'name': 'New Sword',
         'type': 'Sword', 
@@ -61,19 +74,20 @@ describe('post put and delete routes', () => {
       };
       
       // check that the post request responds with the new board game
-      expect(data.body).toEqual(newMagicItem);
+      expect(data.body).toEqual(postedMagicItem);
       // check that the get request contians the new board game
       expect(dataMagicItems.body).toContainEqual(newMagicItem);
     });
 
     test('/PUT magicItems updates a single magic item', async() => {
 
-      // make a request to update the new board game
+      const typeId = getTypeIdByName(types, 'Sword');
+
       const data = await fakeRequest(app)
         .put('/magicItems/9')
         .send({
           name: 'New New Sword',
-          type: 'Sword',
+          type_id: typeId,
           level: 2,
           cursed: true,
           effect: 'does more stuff',
@@ -85,7 +99,17 @@ describe('post put and delete routes', () => {
         .get('/magicItems')
         .expect('Content-Type', /json/)
         .expect(200);
-  
+
+      const putMagicItem = {
+        'name': 'New New Sword',
+        'type_id': typeId, 
+        'level': 2, 
+        'id': 9,
+        'cursed': true, 
+        'effect': 'does more stuff', 
+        'owner_id': 1,
+      };
+
       const newMagicItem = { 
         'name': 'New New Sword',
         'type': 'Sword', 
@@ -97,7 +121,7 @@ describe('post put and delete routes', () => {
       };
         
       // check that the put request responds with the new board game
-      expect(data.body).toEqual(newMagicItem);
+      expect(data.body).toEqual(putMagicItem);
       // check that the get request contians the new board game
       expect(dataMagicItems.body).toContainEqual(newMagicItem);
     });

@@ -24,7 +24,7 @@ async function run() {
                 CREATE TABLE magicItems (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    type_id INTERGER NOT NULL REFERENCES types(id),
+                    type_id INTEGER NOT NULL REFERENCES types(id),
                     level INTEGER NOT NULL,
                     cursed BOOLEAN,
                     effect VARCHAR(512) NOT NULL,
