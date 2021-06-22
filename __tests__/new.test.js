@@ -25,6 +25,9 @@ describe('post put and delete routes', () => {
         });
       
       token = signInData.body.token; // eslint-disable-line
+
+      const typeData = await fakeRequest(app).get('/types');
+      types = typeData.body;
   
       return done();
     });
