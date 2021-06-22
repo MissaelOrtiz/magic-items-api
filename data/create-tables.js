@@ -16,11 +16,15 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
-                );           
+                );
+                CREATE TABLE types (
+                  id SERIAL PRIMARY KEY NOT NULL,
+                  name VARCHAR(1024) NOT NULL
+                );            
                 CREATE TABLE magicItems (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    type VARCHAR(512) NOT NULL,
+                    type_id INTEGER NOT NULL REFERENCES types(id),
                     level INTEGER NOT NULL,
                     cursed BOOLEAN,
                     effect VARCHAR(512) NOT NULL,
